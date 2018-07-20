@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<title>About Me</title>
+		
+		<!-- FONTS -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:300,400,800">
+		<!-- END FONTS -->
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="icons/css/font-awesome.min.css" />
+		<!-- End CSS -->
+		
+		<!-- SCRIPT -->
+		<script src="js/jquery-3.1.1.js"></script>
+		<!-- End SCRIPT -->
+	 	<script>
+			function toggleMenu(menu){
+				var menu = document.getElementById(menu);
+				var elements = document.getElementsByClassName('fa-bars');
+				var menuBars = elements[0];
+				if (menu.dataset.opened == "no") {
+				    menu.style.transform = "perspective(800px) rotateX(0deg)";
+					menu.dataset.opened = "yes";
+					menuBars.style.visibility = 'hidden';
+					return false;
+				} else {
+					menu.style.transform = "perspective(800px) rotateX(90deg)";
+					menu.dataset.opened = "no";
+					menuBars.style.visibility = 'visible';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- START Header -->
+		<header class="wrapper-header">
+			<i class="fa fa-bars" onclick="toggleMenu('menu')"></i>
+			<nav id="menu" class="menu" data-opened="no">
+				<a href="#home">Home</a>
+				<a href="#about">About</a>
+				<a href="#skills">Skills</a>
+				<a href="#portfolio">Portfolio</a>
+				<a href="#contact">Contact</a>
+				<i class="fa fa-times" onclick="toggleMenu('menu')"></i>
+			</nav>
+			<div class="wrapper-img">
+				<div class="flip-box-header">
+					<h4 class="header-img-back">Mihai Vasile <br>Junior Web Developer</h4>
+					<a class="flip" href="#"><img class="header-img" src="images/avatar.jpg" alt="Mihai Vasile" /></a>
+				</div>
+				<h1>Mihai Vasile</h1>
+				<h2>Love developing websites and mobile apps</h2>
+			</div>
+		</header>
+		<!-- END Header -->
+		<!-- START Content -->
+		<div class="content-wrapper">
+			<div class="about-me">
+				<h3><a name="about">About Me</a></h3>
+				<p>I am a junior websites developer, from Romania, and I love developing websites and writing code. I have 2 years experience working with HTML5, CSS3, JS and PHP for a company from Brasov city, providing responsive front-end development and WordPress integrations.</p>
+			</div>
+			<div class="my-skills">
+				<h3><a name="skills">My Skills</a></h3>
+				<ul id="skill">
+					<li><span class="expand" data-skill="html5"></span><em>HTML 5</em></li>
+					<li><span class="expand" data-skill="css3"></span><em>CSS 3</em></li>
+					<li><span class="expand" data-skill="javascript"></span><em>Javascript</em></li>
+					<li><span class="expand" data-skill="php"></span><em>PHP</em></li>
+					<li><span class="expand" data-skill="wordpress"></span><em>Wordpress</em></li>
+					<li><span class="expand" data-skill="photoshop"></span><em>Photoshop</em></li>
+				</ul>
+			</div>
+			<div class="portfolio">
+				<h3><a name="portfolio">Portfolio</a></h3>
+				<ul>
+					<li><img src="images/portfolio/01.jpg" alt="Portfolio 1"></li>
+					<li><img src="images/portfolio/02.jpg" alt="Portfolio 2"></li>
+					<li><img src="images/portfolio/03.jpg" alt="Portfolio 3"></li>
+					<li><img src="images/portfolio/04.jpg" alt="Portfolio 4"></li>
+					<li><img src="images/portfolio/05.jpg" alt="Portfolio 5"></li>
+					<li><img src="images/portfolio/04.jpg" alt="Portfolio 4"></li>
+					<li><img src="images/portfolio/03.jpg" alt="Portfolio 3"></li>
+					<li><img src="images/portfolio/02.jpg" alt="Portfolio 2"></li>
+					<li><img src="images/portfolio/05.jpg" alt="Portfolio 5"></li>
+					<li><img src="images/portfolio/01.jpg" alt="Portfolio 1"></li>
+				</ul>
+			</div>
+			<div class="contact">
+				<h3><a name="contact">Contact Me</a></h3>
+				<div class="form">
+					<form action="#" method="post" enctype="multipart/form-data">
+						<input name="input_text" value="" placeholder="Your Name" type="text">
+						<input name="input_email" value="" placeholder="E-mail Address" type="text">
+						<textarea name="input_textarea" spellcheck="false" placeholder="Message"></textarea>
+						<button type="submit">Send</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- END Content -->
+		<!-- START Footer  -->
+		<footer class="wrapper-footer">
+			<p class="copyright">Copyright &copy; 2016 Mihai Vasile</p>
+			<ul>
+				<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+				<li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+				<li class="tumblr"><a href="#"><i class="fa fa-tumblr"></i></a></li>
+			</ul>
+		</footer>
+		<!-- END Footer  -->
+		<script>
+			var $animation_elements = $('.expand');
+			var $window = $(window);
+
+			function check_if_in_view() {
+				var window_height = $window.height();
+				var window_top_position = $window.scrollTop();
+				var window_bottom_position = (window_top_position + window_height);
+
+				$.each($animation_elements, function() {
+					var $element = $(this);
+					var element_height = $element.outerHeight();
+					var element_top_position = $element.offset().top;
+					var element_bottom_position = (element_top_position + element_height);
+
+					if ((element_bottom_position >= window_top_position) && (element_top_position <= window_bottom_position)) {
+						$element.addClass($(this).data('skill'));
+					} else {
+						$element.removeClass($(this).data('skill'));
+					}
+				});
+			}
+
+			$window.on('scroll', check_if_in_view);
+		</script>
+	</body>
+</html>
